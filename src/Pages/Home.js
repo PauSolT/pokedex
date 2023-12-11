@@ -1,9 +1,8 @@
 import P from "../Utils/Pokedex";
 import PokemonHome from "../Components/PokemonHome";
 import { useEffect, useState } from "react";
-import { Carousel } from "react-responsive-carousel";
 import "../Css/Home.css";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Searchbar from "../Components/Searchbar";
 
 function Home() {
   const [isLoading, setLoading] = useState(true);
@@ -14,7 +13,8 @@ function Home() {
       let newPokemonRenders = [];
       let newPokemonIds = [];
 
-      for (let index = 0; index < 10; index++) {
+      newPokemonIds = [...newPokemonIds, 722];
+      for (let index = 0; index < 15; index++) {
         let randomNumber = Math.floor(Math.random() * 1017) + 1;
         while (newPokemonIds.includes(randomNumber)) {
           randomNumber = Math.floor(Math.random() * 1017) + 1;
@@ -58,27 +58,18 @@ function Home() {
 
   return (
     <div className="Home">
+      <Searchbar />
+
       <div className="showPokemons">
-        <Carousel
-          showThumbs={false}
-          showStatus={false}
-          showIndicators={false}
-          infiniteLoop={true}
-          autoPlay={true}
-          interval={10000} //ms
-          width="20%"
-          height="15%"
-        >
-          {pokemonRenders.map((item, index) => (
-            <div key={index}>
-              <PokemonHome
-                pokemonSpecies={item.species}
-                pokemon={item.pokemon}
-                language={item.language}
-              />
-            </div>
-          ))}
-        </Carousel>
+        {pokemonRenders.map((item, index) => (
+          <div key={index}>
+            <PokemonHome
+              pokemonSpecies={item.species}
+              pokemon={item.pokemon}
+              language={item.language}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

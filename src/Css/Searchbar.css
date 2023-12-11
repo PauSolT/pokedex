@@ -1,0 +1,6 @@
+.formSearchbar {
+    height: 3rem;
+    display: flex; /* establish flex container */
+    justify-content: center; /* center flex items horizontally, in this case */
+    align-items: center;
+}

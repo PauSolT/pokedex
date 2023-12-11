@@ -1,12 +1,14 @@
 .pokemonHome {
-    /* width: 8%; */
+    text-align: center;
+    padding: 5%;
     border-style: solid;
-    border-width: 1%;
-    border-color: red;
-    border-radius: 2%;
+    border-radius: 8px;
+    background-color: #ffffff;
+    height: 90%; /* pc */
+    /* height: 95%; */ /* phone */
 }
 
-.pokemonHome img{
+.pokemonHome img {
     background-color: white;
     border-radius: 10%;
 }

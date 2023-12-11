@@ -23,7 +23,6 @@ function Carousel ({ items }) {
             className={`slide ${index === currentIndex ? 'active' : ''}`}
           >
             {item}
-            {console.log(item)}
           </div>
         ))}
       </div>
