@@ -1,12 +1,50 @@
 .Home {
     width: 100%;
     height: 100%;
-    background-color:darkslategrey;
+    background-color: darkslategrey;
+    /* font-size: clamp(1rem, 1.5vw, 2rem); */
+
 }
 
 .showPokemons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 1rem; 
-  }
-  
+    grid-gap: 1rem;
+    padding: 1%;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .showPokemons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .showPokemons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .showPokemons {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .showPokemons {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .showPokemons {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

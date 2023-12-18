@@ -7,7 +7,6 @@ import "../Css/PokemonHome.css";
 import typeColors from "../Utils/PokemonTypeColors";
 
 function PokemonHome({ pokemonSpecies, pokemon, language }) {
-  console.log(pokemonSpecies);
   const pokemonImgUrl = pokemon.sprites?.front_default;
   const pokemonName = pokemon?.name;
   const pokemonTitle = pokemonSpecies.genera.find(
@@ -22,15 +21,27 @@ function PokemonHome({ pokemonSpecies, pokemon, language }) {
       Math.floor(Math.random() * languagePokemonDescription.length)
     ];
 
-  const backgroundColor = typeColors[pokemon.types[0].type.name] || "#000000";
-  const borderColor =
-    typeColors[pokemon?.types[1]?.type.name] || backgroundColor;
+  const type1Color = typeColors[pokemon.types[0].type.name] || "#ffffff";
+  const type2Color =
+    typeColors[pokemon?.types[1]?.type.name] || type1Color;
+
+  const gradientStyle = {
+    background: `linear-gradient(to right, ${type1Color}, ${type2Color})`,
+  };
+
   return (
-    <div className="pokemonHome" style={{ backgroundColor, borderColor }}>
+    <div className="pokemonHome" style={gradientStyle}>
       <img src={pokemonImgUrl} alt={pokemonName}></img>
+
       <h2>
         {CapitalizeFirstLetter(pokemonName)} | {pokemonTitle}
       </h2>
+      <div className="types" >
+        <div className="type" style={{backgroundColor: type1Color}} >{pokemon.types[0].type.name.toUpperCase()}</div>
+        {pokemon.types[1] && (
+          <div className="type" style={{backgroundColor: type2Color}}>{pokemon.types[1].type.name.toUpperCase()}</div>
+        )}
+      </div>
       <p>
         {pokemonDescription ? (
           <>

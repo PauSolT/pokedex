@@ -1,14 +1,88 @@
 .pokemonHome {
+    position: relative; /* Ensure relative positioning for absolute positioning inside */
     text-align: center;
     padding: 5%;
     border-style: solid;
     border-radius: 8px;
     background-color: #ffffff;
-    height: 90%; /* pc */
-    /* height: 95%; */ /* phone */
+    height: 93%; /* Default height for extra small devices */
 }
 
-.pokemonHome img {
-    background-color: white;
-    border-radius: 10%;
+.types {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+
+.type {
+    border-style: solid;
+    border-color: #000000;
+    border-radius: 20px;
+    border-width: 2px;
+    padding: 2%;
+    padding-left: 3%;
+    padding-right: 3%;
+    margin: 1%;
+}
+
+/* .type2 {
+    border-style: solid;
+    border-color: #ffffff;
+    border-radius: 3px;
+    padding: 1%;
+} */
+
+/* .secondaryType {
+    position: absolute;
+    top: -6px;
+    right: -26px;
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 40px solid;
+    transform: rotate(45deg);
+    border-radius: 8px;
+} */
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .pokemonHome {
+        height: 95%;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .pokemonHome {
+        height: 93%;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .pokemonHome {
+        height: 92%;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .pokemonHome {
+        height: 88%;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .pokemonHome {
+        height: 85%;
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+    .pokemonHome {
+        height: 83%;
+    }
 }

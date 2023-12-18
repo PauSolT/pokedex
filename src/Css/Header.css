@@ -8,7 +8,7 @@ header {
   padding: 1.5%;
   font-size: clamp(1rem, 1.5vw, 2rem);
   font-weight: bold;
-  position: sticky;
+  /* position: sticky; */
   top: 0;
   color: #C5C6C7;
 }

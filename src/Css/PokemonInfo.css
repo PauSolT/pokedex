@@ -1,0 +1,35 @@
+.pokemonInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    img {
+        width: 18rem;
+        height: 18rem;
+    }
+}
+
+.sasd {
+    width: 40%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.base {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.baseGender {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 35%;
+}
+
+.baseAbilities {
+    text-align: right;
+}

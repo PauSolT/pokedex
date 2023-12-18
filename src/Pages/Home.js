@@ -1,5 +1,5 @@
 import P from "../Utils/Pokedex";
-import PokemonHome from "../Components/PokemonHome";
+import PokemonHome from "./PokemonHome";
 import { useEffect, useState } from "react";
 import "../Css/Home.css";
 import Searchbar from "../Components/Searchbar";
@@ -14,7 +14,7 @@ function Home() {
       let newPokemonIds = [];
 
       newPokemonIds = [...newPokemonIds, 722];
-      for (let index = 0; index < 15; index++) {
+      for (let index = 0; index < 11; index++) {
         let randomNumber = Math.floor(Math.random() * 1017) + 1;
         while (newPokemonIds.includes(randomNumber)) {
           randomNumber = Math.floor(Math.random() * 1017) + 1;
