@@ -1,6 +1,5 @@
 import { useNavigate  } from "react-router-dom";
 import "../Css/Searchbar.css"
-import PokemonInfo from "./PokemonInfo";
 
 function Searchbar() {
   const navigate = useNavigate ();
@@ -10,9 +9,8 @@ function Searchbar() {
     const form = e.target;
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
-    // console.log(formJson);
 
-    navigate(`/pokemon/${formJson.searchedPokemon}`)
+    navigate(`/pokemon/${formJson.searchedPokemon.toLowerCase()}`)
   }
 
   return (

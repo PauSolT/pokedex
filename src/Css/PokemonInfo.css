@@ -1,8 +1,9 @@
 .pokemonInfo {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
+    padding-bottom: 2%;
 
     img {
         width: 18rem;
@@ -11,7 +12,7 @@
 }
 
 .sasd {
-    width: 40%;
+    width: 30%;
     padding-left: 5%;
     padding-right: 5%;
 }
@@ -26,10 +27,50 @@
 .baseGender {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     width: 35%;
+    gap: 5%
 }
 
 .baseAbilities {
     text-align: right;
 }
+
+.baseTypes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 60%;
+    gap: 10px
+}
+
+.baseType {
+    border-style: solid;
+    border-color: #000000;
+    border-radius: 7px;
+    border-width: 0px;
+    padding: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.valueCell {
+    display: flex;
+    align-items: center;
+}
+
+.statsTable {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .statsTable th, .statsTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .statsTable th {
+    background-color: #f2f2f2;
+  }
