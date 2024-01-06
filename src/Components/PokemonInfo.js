@@ -197,6 +197,8 @@ function PokemonInformation(baseStyle, info) {
 function PokemonTableStats(info) {
   return (
     <div className="pokemonStats">
+      <h2>Stats</h2>
+
       <table className="statsTable">
         <thead>
           <tr>
@@ -221,7 +223,6 @@ function PokemonTableStats(info) {
                   <div
                     style={{
                       backgroundColor: ChooseColorForStatBar(stat.base_stat),
-                      // borderStyle: "1px solid #FF0000",
                       width: `calc(100% * ${stat.base_stat}/257)`,
                       borderRadius: "5px",
                       height: "15px",
@@ -250,7 +251,6 @@ function PokemonTableStats(info) {
                         0
                       )
                     ),
-                    // borderStyle: "1px solid #FF0000",
                     width: `calc(100% * ${info[0].stats.reduce(
                       (sum, stat) => sum + stat.base_stat,
                       0

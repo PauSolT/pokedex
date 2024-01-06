@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { CapitalizeFirstLetterInSentence } from "../Utils/Utils";
+import "../Css/PokemonMoves.css"
 
 const PokemonMoves = ({ moves }) => {
   const [visibleMoves, setVisibleMoves] = useState(moves);
   const [sortNameOrder, setSortNameOrder] = useState("asc");
   const [sortMethodOrder, setSortMethodOrder] = useState("asc");
   const [sortLevelOrder, setSortLevelOrder] = useState("asc");
+  const [genMovesAvaiable, setGenMovesAvaiable] = useState({
+    hasGen1Moves: "",
+  hasGen2Moves: "",
+  hasGen3Moves: "",
+  hasGen4Moves: "",
+  hasGen5Moves: "",
+  hasGen6Moves: "",
+  hasGen7Moves: "",
+  hasGen8Moves: "",
+  hasGen9Moves: ""
+});
 
   const showVersionGroup = (versionGroup) => {
     const filteredMoves = moves.filter((move) =>
@@ -116,6 +128,61 @@ const PokemonMoves = ({ moves }) => {
     setVisibleMoves(uniqueMoves);
   };
 
+
+  const HasGenMoves = () => {
+        const gen1Moves = [
+          ...showVersionGroup("red-blue"),
+          ...showVersionGroup("yellow"),
+        ];
+        const gen2Moves = [
+          ...showVersionGroup("gold-silver"),
+          ...showVersionGroup("cristal"),
+        ];
+        const gen3Moves = [
+          ...showVersionGroup("ruby-sapphire"),
+          ...showVersionGroup("emerald"),
+          ...showVersionGroup("firered-leafgreen"),
+        ];
+        const gen4Moves = [
+          ...showVersionGroup("diamond-pearl"),
+          ...showVersionGroup("platinum"),
+          ...showVersionGroup("heartgold-soulsilver"),
+        ];
+        const gen5Moves = [
+          ...showVersionGroup("black-white"),
+          ...showVersionGroup("black-2-white-2"),
+        ];
+        const gen6Moves = [
+          ...showVersionGroup("x-y"),
+          ...showVersionGroup("omega-ruby-alpha-sapphire"),
+        ];
+        const gen7Moves = [
+          ...showVersionGroup("sun-moon"),
+          ...showVersionGroup("ultra-sun-ultra-moon"),
+          ...showVersionGroup("lets-go-pikachu-lets-go-eevee"),
+        ];
+        const gen8Moves = [
+          ...showVersionGroup("sword-shield"),
+          ...showVersionGroup("brilliant-diamond-and-shining-pearl"),
+          ...showVersionGroup("legends-arceus"),
+        ];
+        const gen9Moves = [...showVersionGroup("scarlet-violet")];
+
+        const hasGenMoves = {
+          hasGen1Moves: gen1Moves.length === 0 ? "none" : "",
+          hasGen2Moves: gen2Moves.length === 0 ? "none" : "",
+          hasGen3Moves: gen3Moves.length === 0 ? "none" : "",
+          hasGen4Moves: gen4Moves.length === 0 ? "none" : "",
+          hasGen5Moves: gen5Moves.length === 0 ? "none" : "",
+          hasGen6Moves: gen6Moves.length === 0 ? "none" : "",
+          hasGen7Moves: gen7Moves.length === 0 ? "none" : "",
+          hasGen8Moves: gen8Moves.length === 0 ? "none" : "",
+          hasGen9Moves: gen9Moves.length === 0 ? "none" : "",
+        }
+        setGenMovesAvaiable(hasGenMoves);
+    }
+
+
   const SortNameMoves = () => {
     const sortedMoves = [...visibleMoves];
     if (sortNameOrder === "asc") {
@@ -208,24 +275,25 @@ const PokemonMoves = ({ moves }) => {
 
   useEffect(() => {
     // Initialize the table with all moves
+    HasGenMoves();
     setVisibleMoves(moves);
   }, [moves]);
 
   return (
     <div>
       <h2>Moves Classification</h2>
-      <div>
-        <button onClick={() => ShowGenMoves("I")}>Gen I</button>
-        <button onClick={() => ShowGenMoves("II")}>Gen II</button>
-        <button onClick={() => ShowGenMoves("III")}>Gen III</button>
-        <button onClick={() => ShowGenMoves("IV")}>Gen IV</button>
-        <button onClick={() => ShowGenMoves("V")}>Gen V</button>
-        <button onClick={() => ShowGenMoves("VI")}>Gen VI</button>
-        <button onClick={() => ShowGenMoves("VII")}>Gen VII</button>
-        <button onClick={() => ShowGenMoves("VIII")}>Gen VIII</button>
-        <button onClick={() => ShowGenMoves("IX")}>Gen IX</button>
+      <div className="genButtons">
+        <button style={{display: genMovesAvaiable.hasGen1Moves}} onClick={() => ShowGenMoves("I")}>Gen I</button>
+        <button style={{display: genMovesAvaiable.hasGen2Moves}} onClick={() => ShowGenMoves("II")}>Gen II</button>
+        <button style={{display: genMovesAvaiable.hasGen3Moves}} onClick={() => ShowGenMoves("III")}>Gen III</button>
+        <button style={{display: genMovesAvaiable.hasGen4Moves}} onClick={() => ShowGenMoves("IV")}>Gen IV</button>
+        <button style={{display: genMovesAvaiable.hasGen5Moves}} onClick={() => ShowGenMoves("V")}>Gen V</button>
+        <button style={{display: genMovesAvaiable.hasGen6Moves}} onClick={() => ShowGenMoves("VI")}>Gen VI</button>
+        <button style={{display: genMovesAvaiable.hasGen7Moves}} onClick={() => ShowGenMoves("VII")}>Gen VII</button>
+        <button style={{display: genMovesAvaiable.hasGen8Moves}} onClick={() => ShowGenMoves("VIII")}>Gen VIII</button>
+        <button style={{display: genMovesAvaiable.hasGen9Moves}} onClick={() => ShowGenMoves("IX")}>Gen IX</button>
       </div>
-      <table>
+      <table className="statsTable">
         <thead>
           <tr>
             <th onClick={() => SortNameMoves()}>Name</th>
