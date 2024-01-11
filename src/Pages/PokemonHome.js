@@ -2,6 +2,7 @@ import {
   CapitalizeFirstLetter,
   CapitalizeFirstLetterInSentence,
   NoEndOfLines,
+  NoSlash,
 } from "../Utils/Utils";
 import "../Css/PokemonHome.css";
 import typeColors from "../Utils/PokemonTypeColors";
@@ -50,7 +51,7 @@ function PokemonHome({ pokemonSpecies, pokemon, language }) {
             <b>
               {"("}Pokemon{" "}
               {CapitalizeFirstLetterInSentence(
-                pokemonDescription.version.name.replace("-", " ")
+                NoSlash(pokemonDescription.version.name)
               )}
               {")"}
             </b>

@@ -1,4 +1,4 @@
-import { CapitalizeFirstLetterInSentence } from "../Utils/Utils";
+import { CapitalizeFirstLetterInSentence, NoSlash } from "../Utils/Utils";
 
 function ChooseColorForStatBar(value) {
   if (value < 50) return "#FA5858";
@@ -35,7 +35,7 @@ const PokemonTableStats = ({ info }) => {
               <td>
                 <b>
                   {CapitalizeFirstLetterInSentence(
-                    stat.stat.name.replace("-", " ")
+                    NoSlash(stat.stat.name)
                   )}
                 </b>
               </td>

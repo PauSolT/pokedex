@@ -15,3 +15,7 @@ export function CapitalizeFirstLetterInSentence(string) {
     })
     .join(" ");
 }
+
+export function NoSlash(string) {
+  return string.replaceAll("-", " ");
+}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CapitalizeFirstLetterInSentence } from "../Utils/Utils";
+import { CapitalizeFirstLetterInSentence, NoSlash } from "../Utils/Utils";
 import "../Css/PokemonMoves.css"
 
 const PokemonMoves = ({ moves }) => {
@@ -280,7 +280,7 @@ const PokemonMoves = ({ moves }) => {
   }, [moves]);
 
   return (
-    <div>
+    <div className="pokemonMoves">
       <h2>Moves Classification</h2>
       <div className="genButtons">
         <button style={{display: genMovesAvaiable.hasGen1Moves}} onClick={() => ShowGenMoves("I")}>Gen I</button>
@@ -306,7 +306,7 @@ const PokemonMoves = ({ moves }) => {
             <tr key={index}>
               <td>
                 {CapitalizeFirstLetterInSentence(
-                  move.move.name.replace("-", " ")
+                  NoSlash(move.move.name)
                 )}
               </td>
               <td>

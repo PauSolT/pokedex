@@ -5,9 +5,10 @@ import "../Css/PokemonInfo.css";
 import typeColors, { darkTypeColors } from "../Utils/PokemonTypeColors";
 import xpXalues from "../Utils/PokemonXp";
 import generation from "../Utils/PokemonGeneration";
-import { CapitalizeFirstLetterInSentence } from "../Utils/Utils";
+import { CapitalizeFirstLetterInSentence, NoSlash } from "../Utils/Utils";
 import PokemonMoves from "./PokemonMoves";
 import PokemonTableStats from "./PokemonTableStats";
+import PokemonEvolution from "./PokemonEvolution";
 
 function PokemonInfo() {
   const [info, setInfo] = useState(null);
@@ -35,7 +36,6 @@ function PokemonInfo() {
           paddingRight: "2%",
           margin: "5%",
         });
-
       } catch (error) {
         console.log("Error:", error);
         setInfo("No pokemon by that name");
@@ -63,10 +63,11 @@ function PokemonInfo() {
             </div>
           </div>
 
-          <PokemonTableStats info={info}/>
-          <div className="pokemonMoves">
-            <PokemonMoves moves={info[0].moves} />
-          </div>
+          {info[2].chain.evolves_to.length !== 0 && (
+            <PokemonEvolution info={info[2]} pokemonName={info[0].name} />
+          )}
+          <PokemonTableStats info={info} />
+          <PokemonMoves moves={info[0].moves} />
         </>
       )}
       {info && !info[0].id && (
@@ -158,9 +159,7 @@ function PokemonInformation(baseStyle, info) {
         <div className="baseAbilities">
           {info[0].abilities.map((ability, index) => (
             <p key={index}>
-              {CapitalizeFirstLetterInSentence(
-                ability.ability.name.replace("-", " ")
-              )}{" "}
+              {CapitalizeFirstLetterInSentence(NoSlash(ability.ability.name))}{" "}
               {ability.is_hidden && " (hidden)"}
             </p>
           ))}
@@ -197,8 +196,5 @@ function PokemonInformation(baseStyle, info) {
     </div>
   );
 }
-
-
-
 
 export default PokemonInfo;
