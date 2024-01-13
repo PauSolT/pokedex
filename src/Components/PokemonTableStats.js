@@ -1,3 +1,4 @@
+import { darkTypeColors } from "../Utils/PokemonTypeColors";
 import { CapitalizeFirstLetterInSentence, NoSlash } from "../Utils/Utils";
 
 function ChooseColorForStatBar(value) {
@@ -17,16 +18,17 @@ function ChooseColorForTotalStatBar(value) {
 }
 
 const PokemonTableStats = ({ info }) => {
+  console.log(info)
   return (
     <div className="pokemonStats">
-      <h2>Stats</h2>
+      <h2>STATS</h2>
 
       <table className="statsTable">
         <thead>
           <tr>
-            <th style={{ width: "8rem" }}>Stat</th>
-            <th>Value</th>
-            <th style={{ width: "3rem" }}>EV</th>
+            <th style={{ width: "8rem", backgroundColor: darkTypeColors[info[0].types[0].type.name] }}>Stat</th>
+            <th style={{backgroundColor: darkTypeColors[info[0].types[0].type.name]}}>Value</th>
+            <th style={{ width: "3rem", backgroundColor: darkTypeColors[info[0].types[0].type.name] }}>EV</th>
           </tr>
         </thead>
         <tbody>

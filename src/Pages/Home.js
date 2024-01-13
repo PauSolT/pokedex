@@ -2,7 +2,6 @@ import P from "../Utils/Pokedex";
 import PokemonHome from "./PokemonHome";
 import { useEffect, useState } from "react";
 import "../Css/Home.css";
-import Searchbar from "../Components/Searchbar";
 
 function Home() {
   const [isLoading, setLoading] = useState(true);
@@ -58,7 +57,6 @@ function Home() {
 
   return (
     <div className="Home">
-      <Searchbar />
 
       <div className="showPokemons">
         {pokemonRenders.map((item, index) => (

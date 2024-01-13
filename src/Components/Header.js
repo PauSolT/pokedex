@@ -1,15 +1,18 @@
 import "../Css/Header.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Searchbar from "./Searchbar";
 
 function Header() {
+    const navigate = useNavigate();
 
   return (
     <header>
       <div className="headerName">
-          <nav className="headerOptions">
-            HEADER
+          <nav onClick={() => navigate("/")} className="headerOptions">
+            HOME
           </nav>
       </div>
+        <Searchbar />
     </header>
   );
 }

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { CapitalizeFirstLetterInSentence, NoSlash } from "../Utils/Utils";
 import "../Css/PokemonMoves.css"
+import { darkTypeColors } from "../Utils/PokemonTypeColors";
 
-const PokemonMoves = ({ moves }) => {
+const PokemonMoves = ({ moves, typeName }) => {
   const [visibleMoves, setVisibleMoves] = useState(moves);
   const [sortNameOrder, setSortNameOrder] = useState("asc");
   const [sortMethodOrder, setSortMethodOrder] = useState("asc");
@@ -18,7 +19,7 @@ const PokemonMoves = ({ moves }) => {
   hasGen8Moves: "",
   hasGen9Moves: ""
 });
-
+ 
   const showVersionGroup = (versionGroup) => {
     const filteredMoves = moves.filter((move) =>
       move.version_group_details.some(
@@ -275,7 +276,7 @@ const PokemonMoves = ({ moves }) => {
 
   useEffect(() => {
     // Initialize the table with all moves
-    HasGenMoves();
+    HasGenMoves(moves);
     setVisibleMoves(moves);
   }, [moves]);
 
@@ -296,9 +297,9 @@ const PokemonMoves = ({ moves }) => {
       <table className="statsTable">
         <thead>
           <tr>
-            <th onClick={() => SortNameMoves()}>Name</th>
-            <th onClick={() => SortLevelMoves()}>Level</th>
-            <th onClick={() => SortMethodMoves()}>Method</th>
+            <th style={{backgroundColor: darkTypeColors[typeName]}} onClick={() => SortNameMoves()}>Name</th>
+            <th style={{backgroundColor: darkTypeColors[typeName]}} onClick={() => SortLevelMoves()}>Level</th>
+            <th style={{backgroundColor: darkTypeColors[typeName]}} onClick={() => SortMethodMoves()}>Method</th>
           </tr>
         </thead>
         <tbody>

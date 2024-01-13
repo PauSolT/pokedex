@@ -1,13 +1,11 @@
 import PokemonInfo from "../Components/PokemonInfo";
-import Searchbar from "../Components/Searchbar";
 
 function ShowPokemon()
 {
     return(
-        <>
-        <Searchbar />
+        <div style={{backgroundColor: "darkslategrey"}}>
         <PokemonInfo />
-        </>
+        </div>
     )
 }
 

@@ -44,17 +44,12 @@ function PokemonInfo() {
 
     fetchData();
   }, [myParam]);
-  console.log(info);
 
   return (
     <div>
       {info && info[0].id && (
         <>
-          <div
-            style={{
-              background: typeColors[info[0].types[0].type.name] || "#ffffff",
-            }}
-          >
+          <div className="pokemon">
             <h1>{info[0].name.toUpperCase()}</h1>
             <div className="pokemonInfo">
               <img src={info[0].sprites.front_default} alt="pokemonImg"></img>
@@ -62,12 +57,12 @@ function PokemonInfo() {
               {PokemonInformation(baseStyle, info)}
             </div>
           </div>
-
+          <div className="divisoryLine" style={{borderColor: darkTypeColors[info[0].types[0].type.name]}}></div>
           {info[2].chain.evolves_to.length !== 0 && (
-            <PokemonEvolution info={info[2]} pokemonName={info[0].name} />
+            <PokemonEvolution info={info[2]} pokemonName={info[0].name} typeName={info[0].types[0].type.name} />
           )}
           <PokemonTableStats info={info} />
-          <PokemonMoves moves={info[0].moves} />
+          <PokemonMoves moves={info[0].moves} typeName={info[0].types[0].type.name}/>
         </>
       )}
       {info && !info[0].id && (
@@ -93,7 +88,7 @@ function PokemonStats(baseStyle, info) {
         <p>
           <b>CATEGORY</b>
         </p>
-        <p style={{ textAlign: "end" }}>
+        <p>
           {
             info[1].genera.filter((g) => g.language.name.includes("en"))[0]
               .genus
@@ -122,6 +117,7 @@ function PokemonStats(baseStyle, info) {
             style={{
               backgroundColor:
                 typeColors[info[0].types[0].type.name] || "#ffffff",
+                color: "black"
             }}
           >
             {info[0].types[0].type.name.toUpperCase()}
@@ -132,7 +128,9 @@ function PokemonStats(baseStyle, info) {
               style={{
                 backgroundColor:
                   typeColors[info[0].types[1].type.name] || "#ffffff",
+                color: "black"
               }}
+
             >
               {info[0].types[1].type.name.toUpperCase()}
             </div>

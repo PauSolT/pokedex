@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+    color: rgb(229, 229, 229);
 }
 
 .App-header {
@@ -10,5 +11,4 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }

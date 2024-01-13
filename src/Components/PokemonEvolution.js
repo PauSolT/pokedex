@@ -4,20 +4,36 @@ import {
   NoSlash,
 } from "../Utils/Utils";
 import "../Css/PokemonEvolution.css";
+import { useNavigate } from "react-router-dom";
+import { darkTypeColors } from "../Utils/PokemonTypeColors";
 
-const PokemonEvolution = ({ info, pokemonName }) => {
+const PokemonEvolution = ({ info, pokemonName, typeName }) => {
+
+  const baseStyle = {
+    backgroundColor:
+      darkTypeColors[typeName] || "#ffffff",
+    borderRadius: "15px",
+    padding: "3%",
+    margin:"5%",
+  };
+  
+
+  const navigate = useNavigate();
   if (
-    FindEvolutionInfo(info.chain, pokemonName).evolves_to.length === 0 ||
-    FindEvolutionInfo(info.chain, pokemonName) === null
+    FindEvolutionInfo(info.chain, pokemonName) === null ||
+    FindEvolutionInfo(info.chain, pokemonName).evolves_to.length === 0
   ) {
     return "";
   }
-  const evolutionNames = [];
-  const evolutionDetails = [];
+  const evolution = [];
   FindEvolutionInfo(info.chain, pokemonName).evolves_to.forEach((evo) => {
-    evolutionNames.push(evo.species.name);
+    const evolutionDetails = [];
     evo.evolution_details.forEach((evoDetails) => {
       evolutionDetails.push(evoDetails);
+    });
+    evolution.push({
+      name: evo.species.name,
+      details: evolutionDetails,
     });
   });
 
@@ -28,12 +44,22 @@ const PokemonEvolution = ({ info, pokemonName }) => {
         <div className="previousEvolution">
           <h3>{CapitalizeFirstLetter(pokemonName)}</h3>
         </div>
-        <div className="evolutionDetails">
-          {evolutionDetails.map((evoInfo) => ShowEvolutionInfo(evoInfo))}
-        </div>
-        <div className="nextEvolution">
-          {evolutionNames.map((pokemonEvolutionName) => (
-            <h3>{CapitalizeFirstLetter(pokemonEvolutionName)}</h3>
+        <div className="allEvolutions">
+          {evolution.map((evoInfo) => (
+            <div className="evolutionForm">
+              <div className="waysToEvolve">
+                {evoInfo.details.map((evoDetails) => (
+                  <div className="evolutionDetails" style={baseStyle}>
+                    {ShowEvolutionInfo(evoDetails)}
+                  </div>
+                ))}
+              </div>
+              <div className="nextEvolution">
+                <h3 onClick={() => navigate("/pokemon/" + evoInfo.name)}>
+                  {CapitalizeFirstLetter(evoInfo.name)}
+                </h3>
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -42,50 +68,96 @@ const PokemonEvolution = ({ info, pokemonName }) => {
 };
 
 function FindEvolutionInfo(chain, targetName) {
-  // Check if the current species matches the target name
   if (chain.species.name === targetName) {
     return chain;
   }
 
-  // Check each evolves_to branch recursively
   for (const evolution of chain.evolves_to) {
     const nestedInfo = FindEvolutionInfo(evolution, targetName);
 
-    // If the nestedInfo is found, return it
     if (nestedInfo) {
       return nestedInfo;
     }
   }
 
-  // If the target name is not found in the current branch, return null
   return null;
 }
 
 function ShowEvolutionInfo(info) {
-  console.log(info);
-
   return (
     <div>
       <p>
-        <b><i>{CapitalizeFirstLetterInSentence(NoSlash(info.trigger.name))}</i></b> to evolve
+        <b>
+          <i>{CapitalizeFirstLetterInSentence(NoSlash(info.trigger.name))}</i>
+        </b>{" "}
+        to evolve
       </p>
-      <p>{info.gender && (info.gender === 2 ? "Gender: M" : "Gender: F")}</p>
-      <p>{info.held_item && "Held item: " + CapitalizeFirstLetterInSentence(NoSlash(info.held_item.name))}</p>
-      <p>{info.item && "Item: " + CapitalizeFirstLetterInSentence(NoSlash(info.item.name))}</p>
-      <p>{info.known_move && "Has move: " + CapitalizeFirstLetterInSentence(NoSlash(info.known_move.name))}</p>
-      <p>{info.known_move_type && "Has move type: " + CapitalizeFirstLetterInSentence(NoSlash(info.known_move_type))}</p>
-      <p>{info.location && "Location: " + CapitalizeFirstLetterInSentence(NoSlash(info.location.name))}</p>
-      <p>{info.min_affection && "Affection: " + info.min_affection}</p>
-      <p>{info.min_beauty && "Beauty: " + info.min_beauty}</p>
-      <p>{info.min_happiness && "Happiness: " + info.min_happiness}</p>
-      <p>{info.min_level && "Level: " + info.min_level}</p>
-      <p>{info.needs_overworld_rain && "While raining"}</p>
-      <p>{info.party_species && "Pokemon at party: " + info.party_species.name}</p>
-      <p>{info.party_type && "Pokemon type at party: " + info.party_type}</p>
-      <p>{info.time_of_day && "Time of the day: " + info.time_of_day}</p>
-      <p>{info.turn_upside_down && "Turn console upside down"}</p>
+      {info.gender &&
+        (info.gender === 2 ? <p>{"Gender: M"}</p> : <p>{"Gender: F"}</p>)}
+      {info.held_item && (
+        <p>
+          {"Held item: " +
+            CapitalizeFirstLetterInSentence(NoSlash(info.held_item.name))}
+        </p>
+      )}
+
+      {info.item && (
+        <p>
+          {"Item: " + CapitalizeFirstLetterInSentence(NoSlash(info.item.name))}
+        </p>
+      )}
+
+      {info.known_move && (
+        <p>
+          {"Has move: " +
+            CapitalizeFirstLetterInSentence(NoSlash(info.known_move.name))}
+        </p>
+      )}
+
+      {info.known_move_type && (
+        <p>
+          {"Has move type: " +
+            CapitalizeFirstLetterInSentence(NoSlash(info.known_move_type.name))}
+        </p>
+      )}
+
+      {info.location && (
+        <p>
+          {"Location: " +
+            CapitalizeFirstLetterInSentence(NoSlash(info.location.name))}
+        </p>
+      )}
+
+      {info.min_affection && <p>{"Affection: " + info.min_affection}</p>}
+      {info.min_beauty && <p>{"Beauty: " + info.min_beauty}</p>}
+      {info.min_happiness && <p>{"Happiness: " + info.min_happiness}</p>}
+      {info.min_level && <p>{"Level: " + info.min_level}</p>}
+      {info.needs_overworld_rain && <p> {"While raining"}</p>}
+      {info.party_species && (
+        <p>{"Pokemon at party: " + info.party_species.name}</p>
+      )}
+      {info.party_type && <p>{"Pokemon type at party: " + info.party_type}</p>}
+      {info.relative_physical_stats !== null && <p>{RelativePhysicalStats(info.relative_physical_stats)}</p>}
+      {info.time_of_day && <p>{"Time of the day: " + info.time_of_day}</p>}
+      {info.turn_upside_down && <p>{"Turn console upside down"}</p>}
     </div>
   );
+}
+
+function RelativePhysicalStats(info)
+{
+  console.log(info)
+
+  if(info === -1)
+  {
+    return "Attack > Defense";
+  } else if (info === 0)
+  {
+    return "Attack = Defense";
+  } else if (info === 1)
+  {
+    return "Attack < Defense";
+  }
 }
 
 export default PokemonEvolution;
